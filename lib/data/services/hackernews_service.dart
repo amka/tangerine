@@ -1,11 +1,14 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'dart:io';
+
+import 'package:logger/logger.dart';
 
 import "../models/item.dart";
 import '../../utils/result.dart';
 
 class HackernewsService {
+  final log = Logger();
+
   final String _host = 'https://hacker-news.firebaseio.com/v0';
   final HttpClient Function() _clientFactory;
 
@@ -27,7 +30,7 @@ class HackernewsService {
         final json = jsonDecode(stringData) as List<dynamic>;
         return Result.ok(List<int>.from(json));
       } else {
-        log('Failed to best top stories');
+        log.t('Failed to best top stories');
         return const Result.error(HttpException("Invalid response"));
       }
     } on Exception catch (error) {
@@ -52,7 +55,7 @@ class HackernewsService {
         final json = jsonDecode(stringData) as List<dynamic>;
         return Result.ok(List<int>.from(json));
       } else {
-        log('Failed to new stories');
+        log.t('Failed to new stories');
         return const Result.error(HttpException("Invalid response"));
       }
     } on Exception catch (error) {
@@ -77,7 +80,7 @@ class HackernewsService {
         final json = jsonDecode(stringData) as List<dynamic>;
         return Result.ok(List<int>.from(json));
       } else {
-        log('Failed to load best stories');
+        log.t('Failed to load best stories');
         return const Result.error(HttpException("Invalid response"));
       }
     } on Exception catch (error) {
@@ -101,7 +104,7 @@ class HackernewsService {
         final json = jsonDecode(stringData) as Map<String, dynamic>;
         return Result.ok(Item.fromJson(json));
       } else {
-        log('Failed to load item with id $id');
+        log.t('Failed to load item with id $id');
         return const Result.error(HttpException("Invalid response"));
       }
     } on Exception catch (error) {
