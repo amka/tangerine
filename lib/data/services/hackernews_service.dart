@@ -30,7 +30,7 @@ class HackernewsService {
         final json = jsonDecode(stringData) as List<dynamic>;
         return Result.ok(List<int>.from(json));
       } else {
-        log.t('Failed to best top stories');
+        log.e('Failed to best top stories');
         return const Result.error(HttpException("Invalid response"));
       }
     } on Exception catch (error) {
@@ -55,7 +55,7 @@ class HackernewsService {
         final json = jsonDecode(stringData) as List<dynamic>;
         return Result.ok(List<int>.from(json));
       } else {
-        log.t('Failed to new stories');
+        log.e('Failed to new stories');
         return const Result.error(HttpException("Invalid response"));
       }
     } on Exception catch (error) {
@@ -80,7 +80,7 @@ class HackernewsService {
         final json = jsonDecode(stringData) as List<dynamic>;
         return Result.ok(List<int>.from(json));
       } else {
-        log.t('Failed to load best stories');
+        log.e('Failed to load best stories');
         return const Result.error(HttpException("Invalid response"));
       }
     } on Exception catch (error) {
@@ -104,7 +104,7 @@ class HackernewsService {
         final json = jsonDecode(stringData) as Map<String, dynamic>;
         return Result.ok(Item.fromJson(json));
       } else {
-        log.t('Failed to load item with id $id');
+        log.e('Failed to load item with id $id');
         return const Result.error(HttpException("Invalid response"));
       }
     } on Exception catch (error) {
