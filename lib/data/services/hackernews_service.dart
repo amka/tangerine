@@ -28,6 +28,8 @@ class HackernewsService {
       if (response.statusCode == HttpStatus.ok) {
         final stringData = await response.transform(utf8.decoder).join();
         final json = jsonDecode(stringData) as List<dynamic>;
+
+        log.d('Fetched top stories ${json.length}');
         return Result.ok(List<int>.from(json));
       } else {
         log.e('Failed to best top stories');
@@ -102,6 +104,7 @@ class HackernewsService {
       if (response.statusCode == HttpStatus.ok) {
         final stringData = await response.transform(utf8.decoder).join();
         final json = jsonDecode(stringData) as Map<String, dynamic>;
+        log.d('Fetched item with id $id');
         return Result.ok(Item.fromJson(json));
       } else {
         log.e('Failed to load item with id $id');
