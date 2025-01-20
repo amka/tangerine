@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class Item {
   /// The item's unique id.
   final int id;
@@ -78,5 +80,37 @@ class Item {
     "deleted": deleted,
     "text": text,
     "dead": dead,
+  };
+
+  /// Create [Item] from a SQLite row.
+  factory Item.fromRow(Map<String, dynamic> row) => Item(
+    id: row["id"] as int,
+    by: row["by"] as String,
+    descendants: row["descendants"] as int,
+    kids: List<int>.from(jsonDecode(row['kids'] as String)),
+    deleted: row["deleted"] == 1,
+    score: row["score"] as int,
+    time: row["time"] as int,
+    title: row["title"] as String,
+    type: row["type"] as String,
+    url: row["url"] as String,
+    text: row["text"] as String,
+    dead: row["dead"] == 1,
+  );
+
+  /// Converts a [Item] to a Map to store it in SQLite.
+  Map<String, dynamic> toRow() => {
+    "id": id,
+    "by": by,
+    "type": type,
+    "descendants": descendants,
+    "kids": jsonEncode(kids),
+    "score": score,
+    "time": time,
+    "title": title,
+    "url": url,
+    "deleted": deleted ? 1 : 0,
+    "text": text,
+    "dead": dead ? 1 : 0,
   };
 }
