@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 
-import '../core/app_title.dart';
+import '../core/widgets/app_title.dart';
+import '../core/widgets/item_list_tile.dart';
 import '../../data/models/item.dart';
 import '../../data/repository/item_repository.dart';
 
@@ -58,19 +59,29 @@ class _HomeScreenState extends State<HomeScreen> {
                     if (snapshot.connectionState == ConnectionState.done) {
                       if (snapshot.data != null) {
                         final item = snapshot.data as Item;
-                        return ListTile(title: Text(item.title));
+                        return ItemListTile(item: item);
                       } else {
                         return SizedBox.shrink();
                       }
                     } else {
-                      return Center(child: CircularProgressIndicator());
+                      return Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: CircularProgressIndicator.adaptive(),
+                        ),
+                      );
                     }
                   },
                 );
               },
             );
           } else {
-            return Center(child: CircularProgressIndicator());
+            return Center(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: CircularProgressIndicator.adaptive(),
+              ),
+            );
           }
         },
       ),
