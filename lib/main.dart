@@ -6,7 +6,7 @@ import 'app.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  var prefs = await SharedPreferences.getInstance();
+  final prefs = await SharedPreferences.getInstance();
 
-  runApp(const TangerineApp());
+  runApp(TangerineApp(sharedPreferences: prefs));
 }

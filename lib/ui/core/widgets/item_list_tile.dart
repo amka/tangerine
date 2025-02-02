@@ -31,7 +31,11 @@ class ItemListTile extends StatelessWidget {
         alignment: Alignment.center,
         child: Text(
           '${item.score}',
-          style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.onSurface,
+            fontSize: 14,
+          ),
+          overflow: TextOverflow.fade,
         ),
       ),
       title: Text(item.title),
